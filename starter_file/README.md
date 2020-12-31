@@ -1,4 +1,4 @@
-#Labor Prediction Model
+## Labor Prediction Model
 
 For glass installation companies, accurately esimtating how long an installation will take to complete is critical to pricing a job. This model predicts how long a glass installation will take.
 
