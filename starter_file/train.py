@@ -17,7 +17,7 @@ ws = Workspace.from_config()
 datastore_name='workspaceblobstore'
 datastore=Datastore.get(ws,datastore_name)
 
-datastore_path = [(datastore, 'UI/01-03-2021_103243_UTC/LaborPredictionData6.csv')]
+datastore_path = [(datastore, 'UI/01-03-2021_062128_UTC/LaborPredictionData6.csv')]
 ds = Dataset.Tabular.from_delimited_files(path=datastore_path)
 ds = ds.take(3000).to_pandas_dataframe()
 
@@ -133,9 +133,9 @@ def clean_data(dataset):
     dataset['widthWholeNum'] = dataset['widthWholeNum']/widthmax
     dataset['lift'] = dataset['lift']/liftmax
     
-    x = dataset[['heightwholenum','widthWholeNum','lift','LongCarry', 'itemset_','itemset_OTHER', 'itemset_PRESSURE PLATE','itemset_PUTTY','itemset_SCREW BEADS','itemset_SNAP BEADS','itemset_VINYL BEADS', 'itemset_WOOD BEADS','itemset_WRAP AROUND FRAME','itemset_WRAP AROUND RUBBER','itemset_flush glaze', 'leadmechanic_6','leadmechanic_11','leadmechanic_62','leadmechanic_90','leadmechanic_118','leadmechanic_211', 'leadmechanic_228','leadmechanic_OTHER','locationtype_0','locationtype_1','locationtype_2','locationtype_4','locationtype_5','locationtype_6','locationtype_7','locationtype_9','locationtype_10','locationtype_11','locationtype_12', 'locationtype_13','framemat_','framemat_ALUMINUM','framemat_ANDERSEN','framemat_OTHER','framemat_SASH RAIL','framemat_VINYL','framemat_WOOD','framefunc_BOTTOM DH','framefunc_BOTTOM SH', 'framefunc_CASEMENT', 'framefunc_CURTAIN WALL', 'framefunc_FIXED','framefunc_FLUSH GLAZE', 'framefunc_OTHER', 'framefunc_SASH', 'framefunc_SIDELITE', 'framefunc_SLIDER','framefunc_TOP DH', 'framefunc_TOP SH','framefunc_TRANSOM']].values
+    x = dataset[['heightwholenum','widthWholeNum','lift','LongCarry', 'itemset_','itemset_OTHER', 'itemset_PRESSURE PLATE','itemset_PUTTY','itemset_SCREW BEADS','itemset_SNAP BEADS','itemset_VINYL BEADS', 'itemset_WOOD BEADS','itemset_WRAP AROUND FRAME','itemset_WRAP AROUND RUBBER','itemset_flush glaze', 'leadmechanic_6','leadmechanic_11','leadmechanic_62','leadmechanic_90','leadmechanic_118','leadmechanic_211', 'leadmechanic_228','leadmechanic_OTHER','locationtype_0','locationtype_1','locationtype_2','locationtype_4','locationtype_5','locationtype_6','locationtype_7','locationtype_9','locationtype_10','locationtype_11','locationtype_12', 'locationtype_13','framemat_','framemat_ALUMINUM','framemat_ANDERSEN','framemat_OTHER','framemat_SASH RAIL','framemat_VINYL','framemat_WOOD','framefunc_BOTTOM DH','framefunc_BOTTOM SH', 'framefunc_CASEMENT', 'framefunc_CURTAIN WALL', 'framefunc_FIXED','framefunc_FLUSH GLAZE', 'framefunc_OTHER', 'framefunc_SASH', 'framefunc_SIDELITE', 'framefunc_SLIDER','framefunc_TOP DH', 'framefunc_TOP SH','framefunc_TRANSOM']]
     
-    y = dataset['TotalInstallationTime'].values
+    y = dataset['TotalInstallationTime']
 
     return x, y
 
@@ -143,7 +143,7 @@ x, y = clean_data(ds)
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=.8)
 
-train = np.concatenate((x_train,y_train), axis=1)
+train=pd.concat([x_train, y_train], axis=1)
 
 run = Run.get_context()
     
