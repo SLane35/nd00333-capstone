@@ -10,16 +10,9 @@ import pandas as pd
 from azureml.core.run import Run
 from azureml.core import Dataset, Datastore
 from azureml.data.datapath import DataPath
-from azureml.core import Workspace
 
-ws = Workspace.from_config()
-
-datastore_name='workspaceblobstore'
-datastore=Datastore.get(ws,datastore_name)
-
-datastore_path = [(datastore, 'UI/01-03-2021_062128_UTC/LaborPredictionData6.csv')]
-ds = Dataset.Tabular.from_delimited_files(path=datastore_path)
-ds = ds.take(3000).to_pandas_dataframe()
+run = Run.get_context()
+ws = run.experiment.workspace
 
 def clean_data(dataset):
     dataset.itemset = dataset.itemset.fillna('')
@@ -139,13 +132,21 @@ def clean_data(dataset):
 
     return x, y
 
+
+datastore_name='workspaceblobstore'
+datastore=Datastore.get(ws,datastore_name)
+
+datastore_path = [(datastore, 'UI/01-04-2021_073614_UTC/LaborPredictionData6.csv')]
+ds = Dataset.Tabular.from_delimited_files(path=datastore_path)
+
+ds = ds.take(3000).to_pandas_dataframe()
+
 x, y = clean_data(ds)
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=.8)
 
 train=pd.concat([x_train, y_train], axis=1)
 
-run = Run.get_context()
     
 
 def main():
@@ -162,7 +163,7 @@ def main():
 
     model = LinearRegression(fit_intercept=args.fit_intercept, normalize=args.normalize).fit(x_train, y_train)
 
-    rmse = model.score(x_test, y_test, squared=True)
+    rmse = model.score(x_test, y_test)
     run.log("RMSE", np.float(rmse))
     
 
