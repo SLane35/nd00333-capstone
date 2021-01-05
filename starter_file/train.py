@@ -10,9 +10,12 @@ import pandas as pd
 from azureml.core.run import Run
 from azureml.core import Dataset, Datastore
 from azureml.data.datapath import DataPath
+from sklearn import metrics
+from azureml.core import Workspace
 
 run = Run.get_context()
-ws = run.experiment.workspace
+#ws = run.experiment.workspace
+ws = Workspace.from_config()
 
 def clean_data(dataset):
     dataset.itemset = dataset.itemset.fillna('')
@@ -136,7 +139,7 @@ def clean_data(dataset):
 datastore_name='workspaceblobstore'
 datastore=Datastore.get(ws,datastore_name)
 
-datastore_path = [(datastore, 'UI/01-04-2021_073614_UTC/LaborPredictionData6.csv')]
+datastore_path = [(datastore, 'UI/01-05-2021_080112_UTC/LaborPredictionData6.csv')]
 ds = Dataset.Tabular.from_delimited_files(path=datastore_path)
 
 ds = ds.take(3000).to_pandas_dataframe()
@@ -162,9 +165,11 @@ def main():
     run.log("Normalize:", np.bool(args.normalize))
 
     model = LinearRegression(fit_intercept=args.fit_intercept, normalize=args.normalize).fit(x_train, y_train)
+    y_pred = model.predict(x_train)
 
-    rmse = model.score(x_test, y_test)
-    run.log("RMSE", np.float(rmse))
+    r2 = metrics.r2_score(y_train, y_pred)
+    #rmse = model.score(x_test, y_test)
+    run.log("r2", np.float(r2))
     
 
 if __name__ == '__main__':
