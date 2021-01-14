@@ -14,8 +14,8 @@ from sklearn import metrics
 from azureml.core import Workspace
 
 run = Run.get_context()
-#ws = run.experiment.workspace
-ws = Workspace.from_config()
+ws = run.experiment.workspace
+#ws = Workspace.from_config()
 
 def clean_data(dataset):
     dataset.itemset = dataset.itemset.fillna('')
@@ -139,7 +139,7 @@ def clean_data(dataset):
 datastore_name='workspaceblobstore'
 datastore=Datastore.get(ws,datastore_name)
 
-datastore_path = [(datastore, 'UI/01-05-2021_080112_UTC/LaborPredictionData6.csv')]
+datastore_path = [(datastore, 'UI/01-14-2021_052745_UTC/LaborPredictionData6.csv')]
 ds = Dataset.Tabular.from_delimited_files(path=datastore_path)
 
 ds = ds.take(3000).to_pandas_dataframe()
