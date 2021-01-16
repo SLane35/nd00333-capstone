@@ -7,7 +7,7 @@ from pandas import DataFrame
 def init():
     global model
     #model_path = os.path.join(os.getenv('AZUREML_MODEL_DIR'), 'automlmodel.pkl')
-    model_path = os.path.join(os.getenv('AZUREML_MODEL_DIR'), 'hyperdrivemodel.pkl')
+    model_path = os.path.join(os.getenv('AZUREML_MODEL_DIR'), 'bestmodel.pkl')
     model = joblib.load(model_path)
 
 def run(data):
