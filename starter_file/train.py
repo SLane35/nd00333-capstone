@@ -139,7 +139,7 @@ def clean_data(dataset):
 datastore_name='workspaceblobstore'
 datastore=Datastore.get(ws,datastore_name)
 
-datastore_path = [(datastore, 'UI/01-16-2021_080601_UTC/LaborPredictionData6.csv')]
+datastore_path = [(datastore, 'UI/01-18-2021_094706_UTC/LaborPredictionData6.csv')]
 ds = Dataset.Tabular.from_delimited_files(path=datastore_path)
 
 ds = ds.take(3000).to_pandas_dataframe()
@@ -168,7 +168,7 @@ def main():
     y_pred = model.predict(x_train)
 
     r2 = metrics.r2_score(y_train, y_pred)
-    joblib.dump(value=model, filename="bestmodel.pkl")
+    joblib.dump(value=model, filename="./outputs/bestmodel.pkl")
     #rmse = model.score(x_test, y_test)
     run.log("r2", np.float(r2))
     
