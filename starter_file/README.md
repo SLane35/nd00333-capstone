@@ -36,9 +36,14 @@ I think that the model could be improved by running the AutoML for a longer peri
 
 Following are screenshots from the RunDetails widget as well as the best model trained with its parameters:
 
+AutoML Run Details:
 ![AutoML Run Details](https://github.com/SLane35/nd00333-capstone/blob/master/starter_file/AutoML%20Run%20Details.png)
 ![AutoML While Running](https://github.com/SLane35/nd00333-capstone/blob/master/starter_file/AutoML%20While%20Running.png)
+
+AutoML Best Model:
 ![AutoML Best Model](https://github.com/SLane35/nd00333-capstone/blob/master/starter_file/AutoML%20Best%20Model.png)
+
+AutoML Best Model Parameters:
 ![AutoML Best Model Parameters 1](https://github.com/SLane35/nd00333-capstone/blob/master/starter_file/AutoML%20Parameters1.png)
 ![AutoML Best Model Parameters 2](https://github.com/SLane35/nd00333-capstone/blob/master/starter_file/AutoML%20Parameters2.png)
 
@@ -52,9 +57,14 @@ The best model used the VotingEnsemble algorithm and achieved an r2 score of .34
 
 Following are screenshots from the RunDetails widget as well as the best model trained with its parameters:
 
+Hyperdrive Run Details:
 ![Hyperdrive Run Details](https://github.com/SLane35/nd00333-capstone/blob/master/starter_file/Hyperdrive%20Run%20Details.png)
 ![Hyperdrive Run Details 2](https://github.com/SLane35/nd00333-capstone/blob/master/starter_file/Hyperdrive%20Run%20Details%202.png)
+
+Hyperdrive Best Model:
 ![Hyperdrive Best Model](https://github.com/SLane35/nd00333-capstone/blob/master/starter_file/Hyperdrive%20Best%20Run.png)
+
+Hyperdrive Best Model Parameters:
 ![Hyperdrive Best Model Parameters](https://github.com/SLane35/nd00333-capstone/blob/master/starter_file/Hyperdrive%20Best%20Model%20Parameters.png)
 
 ## Model Deployment
