@@ -26,7 +26,7 @@ Long Carry - whether they had to carry the glass over a long distance
 The data is stored as a csv file in Github. For the purposes of this project, I downloaded the whole Github file to the computer that I was working on and then created a dataset in Azure that referenced the csv file on the local computer.
 
 ## Automated ML
-First, I cleaned the dataset, which entailed using one-hot-encoding for the categorical columns and normalizing the numeric columns. Then I split the dataset 80/20 into train and test sets. Finally, I created an AutoMLConfig file with the task set as "regression", the primary metric as "r2 score", and the number of cross validations as 10. I also set the experiment timeout to be 30 minutes because of limitations in the time allowed for the Azure workspace. 
+First, I cleaned the dataset, which entailed using one-hot-encoding for the categorical columns and normalizing the numeric columns. Then I split the dataset 80/20 into train and test sets. Finally, I created an AutoML settings dictionary and an AutoMLConfig file. In the settings dictionary, I set the experiment timeout  with the task set as "regression", the primary metric as "r2 score", and the number of cross validations as 10. I also set the experiment timeout to be 30 minutes because of limitations in the time allowed for the Azure workspace. 
 
 ### Results
 The best model used the VotingEnsemble algorithm and achieved an r2 score of .30299. The parameters used were as follows:
