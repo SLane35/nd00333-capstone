@@ -1,6 +1,6 @@
 ## Labor Prediction Model
 
-For glass installation companies, accurately esimtating how long an installation will take to complete is critical to pricing a job. This model predicts how long a glass installation will take.
+For glass installation companies, accurately estimating how long an installation will take to complete is critical to pricing a job. This model predicts how long a glass installation will take.
 
 ## Project Set Up and Installation
 To run this project, download the zip file from Github and extract the files. Launch the Azure ML Studio and create a new dataset that points to the local csv file from the zip file that you downloaded. Then go to Notebooks and upload the whole folder so that you have all the files accessible. You can then run the automl.ipynb and hyperparameter_tuning.ipynb files.
@@ -26,7 +26,7 @@ Long Carry - whether they had to carry the glass over a long distance
 The data is stored as a csv file in Github. For the purposes of this project, I downloaded the whole Github file to the computer that I was working on and then created a dataset in Azure that referenced the csv file on the local computer.
 
 ## Automated ML
-First, I cleaned the dataset, which entailed using one-hot-encoding for the categorical columns and normalizing the numeric columns. Then I split the dataset 80/20 into train and test sets. Finally, I created an AutoML settings dictionary and an AutoMLConfig file. In the settings dictionary, I set the experiment timeout  with the task set as "regression", the primary metric as "r2 score", and the number of cross validations as 10. I also set the experiment timeout to be 30 minutes because of limitations in the time allowed for the Azure workspace. 
+First, I cleaned the dataset, which entailed using one-hot-encoding for the categorical columns and normalizing the numeric columns. Then I split the dataset 80/20 into train and test sets. Finally, I created an AutoML settings dictionary and an AutoMLConfig file. In the settings dictionary, I set the experiment timeout to 30 due to time constraints in the Azure workspace. I set the max concurrent iterations to 3 and the primary metric to r2 score since that is considered a good metric for regression problems. For the AutoML configuration, I set the task set to "regression", the trainind data to the "train" dataset, and the label column name to the TotalInstallationTime column. I also set featurization to "auto" and the number of cross validations as 10, with a debug log called "automl_errors.log". I also added the automl_settings dictionary that I set previously. 
 
 ### Results
 The best model used the VotingEnsemble algorithm and achieved an r2 score of .30299. The parameters used were as follows:
@@ -53,7 +53,9 @@ I chose a Linear Regression for this experiment since that most closely fit the 
 I set the primary metric to r2 in order to be able to compare to the AutoML run.
 
 ### Results
-The best model used the VotingEnsemble algorithm and achieved an r2 score of .34497. The parameters used were as follows: fit intercept: 0, normalize: 0. I would like to try experimenting with different parameters to see if I can get better results. 
+The best model used the Linear Regression algorithm and achieved an r2 score of .34497. The parameters used were as follows: fit intercept: 0, normalize: 0. I would like to try experimenting with different parameters to see if I can get better results. 
+
+The Hypredrive experiment achieved better results than the AutoML experiment (an r2 score of .306 as opposed to 
 
 Following are screenshots from the RunDetails widget as well as the best model trained with its parameters:
 
